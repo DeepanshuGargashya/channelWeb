@@ -4,14 +4,23 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./screens/Login";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.min.js";
-import Dashboard from "./screens/dashboard";
+import Dashboard from "./screens/dashboard/dashboard";
+import AuthComponent from "./component/AuthComponent";
+import LoginComponent from "./component/loginComponent";
+import Recharge from "./screens/recharge/recharge";
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route exact path="/" element={<Login />} />
-        <Route exact path="/dashboard" element={<Dashboard />} />
+        <Route element={<LoginComponent />}>
+          <Route index exact path="/login" element={<Login />} />
+        </Route>
+
+        <Route element={<AuthComponent />}>
+          <Route exact path="/" element={<Dashboard />} />
+          <Route exact path="/recharge" element={<Recharge />} />
+        </Route>
       </Routes>
     </Router>
   );

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
 
-export default function Login() {
+export default function Signup() {
   const Navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
