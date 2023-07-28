@@ -4,6 +4,51 @@
     padding: 0;
     font-family: Arial, sans-serif;
 }
+.btn-logout {
+
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.475rem 1.75rem;
+    font-size: 1rem;
+    border-radius: 0.55rem;
+    border-color: lightskyblue;
+
+}
+.btn-makePayment {
+
+    display: inline-block;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: white;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.475rem 1.75rem;
+    font-size: 1rem;
+    border-radius: 0.55rem;
+    border-color: lightgreen;
+
+}
+
+.nav-right {
+    margin-right: 2rem;
+}
+
+.btn-makePayment:hover {
+    background-color: lightgreen;
+    color: black;
+}
+.btn-logout:hover {
+    background-color: lightskyblue;
+    color: black;
+}
 
 nav {
     background-color: #333;

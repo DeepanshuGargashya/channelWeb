@@ -5,6 +5,7 @@ import ChannelCard from "../../component/channelCard/channelCard";
 
 function Recharge() {
   const Navigate = useNavigate();
+  const [exploreFooter, setExploreFooter] = useState(false);
   const [channels, setChannels] = useState([]);
   const [selectedChannels, setSelectedChannels] = useState([]);
   const [totalChannelsPrice, setTotalChannelsPrice] = useState(0);
@@ -12,12 +13,25 @@ function Recharge() {
   const performActionOnItem = (action, item) => {
     console.log(action, item);
     if (action === "add") {
+      localStorage.setItem("selectedChannels", [
+        ...selectedChannels,
+        item.CHANNEL_NAME,
+      ]);
+      localStorage.setItem(
+        "totalPrice",
+        parseFloat(totalChannelsPrice) + parseFloat(item.PMRP)
+      );
       setSelectedChannels([...selectedChannels, item.CHANNEL_NAME]);
-      setTotalChannelsPrice(parseInt(totalChannelsPrice) + parseInt(item.PMRP));
+      setTotalChannelsPrice(
+        parseFloat(totalChannelsPrice) + parseFloat(item.PMRP)
+      );
+      console.log(parseFloat(totalChannelsPrice));
+      console.log(parseFloat(item.PMRP));
     } else {
       var index = selectedChannels.indexOf(item.CHANNEL_NAME);
       if (index > -1) {
         selectedChannels.splice(index, 1);
+        localStorage.setItem("selectedChannels", selectedChannels);
       }
       //   ["hungama", "plus", "star", 6, 8];
     }
@@ -73,11 +87,13 @@ function Recharge() {
             justifyContent: "space-between",
             alignItems: "center",
             padding: "1rem",
+            marginBottom: "5rem",
           }}
         >
           {channels.map((item) => {
             return (
               <ChannelCard
+                key={item.PID}
                 item={item}
                 performActionOnItem={performActionOnItem}
               />
@@ -85,43 +101,87 @@ function Recharge() {
           })}
         </div>
       </div>
-
+      {/* footer  */}
       <div
         style={{
           backgroundColor: "darkgray",
+
           width: "100%",
-          padding: "1rem",
+          padding: "0.3rem 1rem",
+          paddingTop: "1rem",
           color: "white",
           position: "fixed",
           bottom: 0,
           left: 0,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
         }}
       >
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <p>Total Channels</p>
-          <p>{selectedChannels.length.toString()}</p>
-        </div>
+        {/* total channels  */}
+        {exploreFooter ? (
+          <>
+            <div
+              style={{
+                display: "flex",
+                position: "relative",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingLeft: "1rem",
+                paddingRight: "1rem",
+              }}
+            >
+              <p>Total Channels</p>
+              <p>{selectedChannels.length.toString()}</p>
+            </div>
 
-        <hr />
+            <hr style={{ margin: "0.3rem" }} />
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <p>Total Amount</p>
-          <p>{totalChannelsPrice.toString()}</p>
-        </div>
+            {/* total amount  */}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingLeft: "1rem",
+                paddingRight: "1rem",
+              }}
+            >
+              <p>Total Amount</p>
+              <p>{totalChannelsPrice.toString()}</p>
+            </div>
+            <div
+              onClick={() => setExploreFooter(false)}
+              style={{ position: "absolute", top: 0, right: 10 }}
+            >
+              <i
+                // style={{ color: "white" }}
+                className="bi bi-arrow-down-square-fill"
+              ></i>
+            </div>
+          </>
+        ) : (
+          <>
+            <div
+              style={{
+                display: "flex",
+                position: "relative",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <p>explore for price,amount</p>
+            </div>
+            <div
+              onClick={() => setExploreFooter(true)}
+              style={{ position: "absolute", top: 0, right: 10 }}
+            >
+              <i className="bi bi-arrow-up-square-fill"></i>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

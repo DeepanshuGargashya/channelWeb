@@ -8,6 +8,7 @@ import Dashboard from "./screens/dashboard/dashboard";
 import AuthComponent from "./component/AuthComponent";
 import LoginComponent from "./component/loginComponent";
 import Recharge from "./screens/recharge/recharge";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
   return (

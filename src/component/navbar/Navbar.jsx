@@ -1,7 +1,15 @@
 import React from "react";
 import "./Nav.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 function Navbar() {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const logoutHandle = () => {
+    console.log(location);
+    console.log(location.pathname);
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
   return (
     <div className="body">
       <nav>
@@ -43,6 +51,42 @@ function Navbar() {
             </Link>
           </li>
         </ul>
+        <div
+          style={{
+            flexDirection: "row",
+            display: "flex",
+            justifyContent: "right",
+            alignItems: "center",
+          }}
+        >
+          {location.pathname === "/recharge" ? (
+            <div className="nav-right">
+              <button
+                className="btn-makePayment"
+                title="Next"
+                onClick={logoutHandle}
+              >
+                Next
+                {/* <i class="bi bi-arrow-right-circle-fill"></i> */}
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+          {localStorage.getItem("user") ? (
+            <div className="nav-right">
+              <button
+                className="btn-logout"
+                title="Logout"
+                onClick={logoutHandle}
+              >
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
+        </div>
       </nav>
     </div>
   );
