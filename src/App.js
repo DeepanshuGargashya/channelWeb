@@ -9,6 +9,7 @@ import AuthComponent from "./component/AuthComponent";
 import LoginComponent from "./component/loginComponent";
 import Recharge from "./screens/recharge/recharge";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import MakePayment from "./screens/makePayment/makePayment";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route element={<AuthComponent />}>
           <Route exact path="/" element={<Dashboard />} />
           <Route exact path="/recharge" element={<Recharge />} />
+          <Route exact path="/makePayment" element={<MakePayment />} />
         </Route>
       </Routes>
     </Router>

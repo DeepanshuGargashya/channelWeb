@@ -12,26 +12,32 @@ function Recharge() {
 
   const performActionOnItem = (action, item) => {
     console.log(action, item);
+    var payload = [...selectedChannels, item];
     if (action === "add") {
-      localStorage.setItem("selectedChannels", [
-        ...selectedChannels,
-        item.CHANNEL_NAME,
-      ]);
+      localStorage.setItem("selectedChannels", JSON.stringify(payload));
       localStorage.setItem(
         "totalPrice",
         parseFloat(totalChannelsPrice) + parseFloat(item.PMRP)
       );
-      setSelectedChannels([...selectedChannels, item.CHANNEL_NAME]);
+      setSelectedChannels([...selectedChannels, item]);
       setTotalChannelsPrice(
         parseFloat(totalChannelsPrice) + parseFloat(item.PMRP)
       );
       console.log(parseFloat(totalChannelsPrice));
       console.log(parseFloat(item.PMRP));
     } else {
-      var index = selectedChannels.indexOf(item.CHANNEL_NAME);
+      var index = selectedChannels.indexOf(item);
       if (index > -1) {
         selectedChannels.splice(index, 1);
-        localStorage.setItem("selectedChannels", selectedChannels);
+        localStorage.setItem(
+          "selectedChannels",
+          JSON.stringify(selectedChannels)
+        );
+        localStorage.setItem(
+          "totalPrice",
+          parseFloat(localStorage.getItem("totalPrice") - parseFloat(item.PMRP))
+        );
+        setTotalChannelsPrice(totalChannelsPrice - parseFloat(item.PMRP));
       }
       //   ["hungama", "plus", "star", 6, 8];
     }
@@ -39,6 +45,7 @@ function Recharge() {
   };
 
   const fetchChannelList = async () => {
+    localStorage.setItem("selectedChannels", []);
     await axios
       .get("http://192.168.218.197:4000/channelList/")
       .then((res) => {
@@ -55,7 +62,7 @@ function Recharge() {
 
   useEffect(() => {
     fetchChannelList();
-  });
+  }, []);
 
   return (
     <>
