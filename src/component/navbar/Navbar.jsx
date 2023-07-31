@@ -8,7 +8,8 @@ function Navbar() {
   const logoutHandle = () => {
     console.log(location);
     console.log(location.pathname);
-    localStorage.removeItem("user");
+    // localStorage.removeItem("user");
+    localStorage.clear();
     navigate("/login");
   };
   const arrayOf = (data) => {

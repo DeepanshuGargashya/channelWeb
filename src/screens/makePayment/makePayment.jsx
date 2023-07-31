@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "./makePayment.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function MakePayment() {
   const Navigate = useNavigate();
   const [selectedChannels, setSelectedChannels] = useState([]);
+  const [accountNumber, setAccountNumber] = useState("");
   const [totalPrice, setTotalPrice] = useState(0);
 
   const getData = () => {
@@ -16,11 +18,31 @@ function MakePayment() {
       Navigate(-1);
     }
   };
-  const makePayment = () => {
-    console.log(selectedChannels);
-    console.log(selectedChannels[0]);
-    console.log(selectedChannels[0]["PID"]);
-    console.log(typeof selectedChannels);
+  const makePayment = async () => {
+    var payload = {
+      ambId: localStorage.getItem("ambId"),
+      accountNumber: accountNumber.toString(),
+      totalAmount: parseFloat(totalPrice.toString()),
+      channelList: selectedChannels,
+    };
+    await axios
+      .post("http://localhost:4000/makePayment/", payload)
+      .then((res) => {
+        if (res.data.status === 200) {
+          alert(res.data.data);
+          Navigate("/recharge");
+        } else {
+          alert(res.data.data);
+        }
+      })
+      .catch((err) => {
+        alert("Something went wrong, Please try again");
+      });
+    console.log(payload);
+  };
+  const handleChange = (e) => {
+    setAccountNumber(e.target.value);
+    console.log(accountNumber);
   };
 
   useEffect(() => {
@@ -85,6 +107,8 @@ function MakePayment() {
               type="number"
               className="form-control"
               id="exampleInputEmail1"
+              value={accountNumber}
+              onChange={handleChange}
               aria-describedby="emailHelp"
             />
           </div>

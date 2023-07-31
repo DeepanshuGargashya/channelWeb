@@ -29,6 +29,7 @@ export default function Login() {
         .then((res) => {
           if (res.data.status === 200) {
             localStorage.setItem("user", true);
+            localStorage.setItem("ambId", res.data.data._id);
             Navigate("/");
           } else {
             alert(res.data.data);
