@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import OtpInput from "react-otp-input";
+import { API_URL } from "../constant/constant";
 
 export default function Login() {
   const Navigate = useNavigate();
@@ -25,7 +26,7 @@ export default function Login() {
         otp: otp,
       };
       await axios
-        .post("http://192.168.218.197:4000/auth/verifyotp", payload)
+        .post(`${API_URL}/auth/verifyotp`, payload)
         .then((res) => {
           if (res.data.status === 200) {
             localStorage.setItem("user", true);
@@ -58,7 +59,7 @@ export default function Login() {
         mobile: credentials.mobile.toString(),
       };
       await axios
-        .post("http://192.168.218.197:4000/auth/sendotp", payload)
+        .post(`${API_URL}/auth/sendotp`, payload)
         .then((res) => {
           console.log(res);
           if (res.data.status === 200) {

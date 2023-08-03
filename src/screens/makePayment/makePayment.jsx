@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./makePayment.css";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../../constant/constant";
 
-function MakePayment() {
+function MakePayment({ showAlert }) {
   const Navigate = useNavigate();
   const [selectedChannels, setSelectedChannels] = useState([]);
   const [accountNumber, setAccountNumber] = useState("");
@@ -26,17 +27,17 @@ function MakePayment() {
       channelList: selectedChannels,
     };
     await axios
-      .post("http://localhost:4000/makePayment/", payload)
+      .post(`${API_URL}/makePayment/`, payload)
       .then((res) => {
         if (res.data.status === 200) {
-          alert(res.data.data);
+          showAlert(res.data.data, "success");
           Navigate("/recharge");
         } else {
-          alert(res.data.data);
+          showAlert(res.data.data, "danger");
         }
       })
       .catch((err) => {
-        alert("Something went wrong, Please try again");
+        showAlert("Something went wrong, Please try again", "danger");
       });
     console.log(payload);
   };

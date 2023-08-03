@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChannelCard from "../../component/channelCard/channelCard";
+import { API_URL } from "../../constant/constant";
 
 function Recharge() {
   const Navigate = useNavigate();
@@ -47,7 +48,7 @@ function Recharge() {
   const fetchChannelList = async () => {
     localStorage.setItem("selectedChannels", []);
     await axios
-      .get("http://192.168.218.197:4000/channelList/")
+      .get(`${API_URL}/channelList/`)
       .then((res) => {
         if (res.data.status === 200) {
           setChannels(res.data.data);

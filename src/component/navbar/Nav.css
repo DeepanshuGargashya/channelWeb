@@ -1,6 +1,6 @@
 .body {
     margin: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 0rem;
     padding: 0;
     font-family: Arial, sans-serif;
 }
@@ -21,7 +21,7 @@
     border-color: lightskyblue;
 
 }
-.btn-makePayment {
+.btn-makePaymentt{
 
     display: inline-block;
     font-weight: 600;
@@ -42,7 +42,7 @@
     margin-right: 2rem;
 }
 
-.btn-makePayment:hover {
+.btn-makePaymentt:hover {
     background-color: lightgreen;
     color: black;
 }

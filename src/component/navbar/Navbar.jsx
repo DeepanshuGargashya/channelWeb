@@ -80,7 +80,7 @@ function Navbar() {
           {location.pathname === "/recharge" ? (
             <div className="nav-right">
               <button
-                className="btn-makePayment"
+                className="btn-makePaymentt"
                 title="Next"
                 onClick={handleNext}
               >

@@ -10,8 +10,23 @@ import LoginComponent from "./component/loginComponent";
 import Recharge from "./screens/recharge/recharge";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import MakePayment from "./screens/makePayment/makePayment";
+import { useState } from "react";
 
 function App() {
+  const [alert, setAlert] = useState(null);
+
+  const showAlert = (message, type) => {
+    setAlert({
+      msg: message,
+      type: type,
+    });
+
+    // setCredentials({...credentials, [e.target.name]: e.target.value})
+
+    setTimeout(() => {
+      setAlert(null);
+    }, 3000);
+  };
   return (
     <Router>
       <Routes>
@@ -19,10 +34,18 @@ function App() {
           <Route index exact path="/login" element={<Login />} />
         </Route>
 
-        <Route element={<AuthComponent />}>
-          <Route exact path="/" element={<Dashboard />} />
-          <Route exact path="/recharge" element={<Recharge />} />
-          <Route exact path="/makePayment" element={<MakePayment />} />
+        <Route element={<AuthComponent alert={alert} />}>
+          <Route exact path="/" element={<Dashboard showAlert={showAlert} />} />
+          <Route
+            exact
+            path="/recharge"
+            element={<Recharge showAlert={showAlert} />}
+          />
+          <Route
+            exact
+            path="/makePayment"
+            element={<MakePayment showAlert={showAlert} />}
+          />
         </Route>
       </Routes>
     </Router>

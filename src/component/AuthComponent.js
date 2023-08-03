@@ -1,7 +1,8 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "./navbar/Navbar";
-function AuthComponent() {
+import Alert from "../component/Alert";
+function AuthComponent(props) {
   let auth = localStorage.getItem("user");
   return (
     <>
@@ -17,6 +18,7 @@ function AuthComponent() {
         }}
       >
         <Navbar />
+        <Alert alert={props.alert} />
       </div>
 
       {auth ? <Outlet /> : <Navigate to="/login" />}
