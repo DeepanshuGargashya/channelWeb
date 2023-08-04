@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ChannelCard from "../../component/channelCard/channelCard";
 import { API_URL } from "../../constant/constant";
-
+import Loader from "../../component/loader";
 function Recharge() {
   const Navigate = useNavigate();
   const [exploreFooter, setExploreFooter] = useState(false);
   const [channels, setChannels] = useState([]);
+  const [loader, setLoader] = useState(false);
   const [selectedChannels, setSelectedChannels] = useState([]);
   const [totalChannelsPrice, setTotalChannelsPrice] = useState(0);
 
@@ -46,18 +47,24 @@ function Recharge() {
   };
 
   const fetchChannelList = async () => {
+    setLoader(true);
     localStorage.setItem("selectedChannels", []);
     await axios
       .get(`${API_URL}/channelList/`)
       .then((res) => {
         if (res.data.status === 200) {
           setChannels(res.data.data);
+          setTimeout(function () {
+            setLoader(false);
+          }, 3000);
         } else {
           Navigate(-1);
+          setLoader(false);
         }
       })
       .catch((err) => {
         Navigate(-1);
+        setLoader(false);
       });
   };
 
@@ -67,6 +74,8 @@ function Recharge() {
 
   return (
     <>
+      {loader && <Loader />}
+
       <div
         style={{
           marginTop: "5.5rem",
