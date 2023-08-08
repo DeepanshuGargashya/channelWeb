@@ -7,12 +7,13 @@
     z-index: 10000;
     background-color:rgba(0, 0, 0, 0.3);
     
+    /* background-color: white; */
 }
 .loading{
     width: 100%;
     /* background-color: red; */
+    height: 90vh;
     display: flex;
-        height: 90vh;
-        justify-content: center;
-        align-items: center;
+    justify-content: center;
+    align-items: center;
 }

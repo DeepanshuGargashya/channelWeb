@@ -55,6 +55,7 @@ function Recharge() {
         if (res.data.status === 200) {
           setChannels(res.data.data);
           setTimeout(function () {
+            console.log("loader false");
             setLoader(false);
           }, 3000);
         } else {

@@ -57,16 +57,42 @@ function Navbar() {
         </div>
         <ul className="navbar-links">
           <li className="navbar-link">
-            <Link to={"/"}>Home</Link>
+            <Link
+              to={"/"}
+              style={location.pathname == "/" ? { color: "#ffcc00" } : {}}
+            >
+              Home
+            </Link>
           </li>
           <li className="navbar-link">
-            <Link to={"/recharge"}>Recharge</Link>
+            <Link
+              to={"/recharge"}
+              style={
+                location.pathname == "/recharge" ? { color: "#ffcc00" } : {}
+              }
+            >
+              Recharge
+            </Link>
           </li>
           <li className="navbar-link">
-            <Link to={"/history"}>History</Link>
+            <Link
+              to={"/history"}
+              style={
+                location.pathname == "/history" ? { color: "#ffcc00" } : {}
+              }
+            >
+              History
+            </Link>
           </li>
           <li className="navbar-link">
-            <Link to={"/contact"}>Contact</Link>
+            <Link
+              to={"/contact"}
+              style={
+                location.pathname == "/contact" ? { color: "#ffcc00" } : {}
+              }
+            >
+              Contact
+            </Link>
           </li>
         </ul>
         <div

@@ -10,7 +10,10 @@ import LoginComponent from "./component/loginComponent";
 import Recharge from "./screens/recharge/recharge";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import MakePayment from "./screens/makePayment/makePayment";
+import History from "./screens/history/history";
 import { useState } from "react";
+import Details from "./screens/history/details";
+import Contact from "./screens/contact/contact";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -45,6 +48,13 @@ function App() {
             exact
             path="/makePayment"
             element={<MakePayment showAlert={showAlert} />}
+          />
+          <Route exact path="/history" element={<History />} />
+          <Route exact path="/history/details" element={<Details />} />
+          <Route
+            exact
+            path="/contact"
+            element={<Contact showAlert={showAlert} />}
           />
         </Route>
       </Routes>
