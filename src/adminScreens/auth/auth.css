@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+            width: 100%;
+            height: 99vh;
+            margin: auto;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap-reverse;
+            overflow-y: visible;
+}
+
+
+@media only screen and (max-width: 772px){
+    /* .container{
+        overflow-y: scroll;
+    } */
+}

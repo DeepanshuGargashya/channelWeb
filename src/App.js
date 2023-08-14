@@ -14,6 +14,7 @@ import History from "./screens/history/history";
 import { useState } from "react";
 import Details from "./screens/history/details";
 import Contact from "./screens/contact/contact";
+import AdminLogin from "./adminScreens/auth/auth";
 
 function App() {
   const [alert, setAlert] = useState(null);
@@ -35,6 +36,7 @@ function App() {
       <Routes>
         <Route element={<LoginComponent />}>
           <Route index exact path="/login" element={<Login />} />
+          <Route index exact path="/adminLogin" element={<AdminLogin />} />
         </Route>
 
         <Route element={<AuthComponent alert={alert} />}>
